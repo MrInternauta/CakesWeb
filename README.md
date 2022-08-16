@@ -25,3 +25,11 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Angular Module Loading: Eager, Lazy and Preloading
+
+Eager loading is loading modules before application starts. Lazy loading is loading modules on demand. Preloading is loading modules in background just after application starts. In lazy loading and preloading, modules are loaded asynchronously.
+
+- Eager loading: To load a feature module eagerly, we need to import it into application module using imports metadata of @NgModule decorator. Eager loading is useful in small size applications. In eager loading, all the feature modules will be loaded before the application starts. Hence the subsequent request to the application will be faster.
+- Lazy loading: To load a feature module lazily, we need to load it using loadChildren property in route configuration and that feature module must not be imported in application module. Lazy loading is useful when the application size is growing. In lazy loading, feature module will be loaded on demand and hence application start will be faster.
+- Preloading: To preload a feature module, we need to load it using loadChildren property and configure preloadingStrategy property in RouterModule.forRoot. That feature module must not be imported in application module. When we assign Angular PreloadAllModules strategy to preloadingStrategy property, then all feature modules configured with loadChildren, are preloaded. To preload selective modules, we need to use custom preloading strategy. We should preload only those features which will be visited by users just after application start and rest feature modules can be loaded lazily. In this way we can improve the performance of our bigger size application.

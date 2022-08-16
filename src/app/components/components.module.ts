@@ -8,4 +8,4 @@ import { PaymentMethodComponent } from './payment-method/payment-method.componen
   imports: [CommonModule],
   exports: [DropdownComponent, PaymentMethodComponent],
 })
-export class ComponentsModuleModule {}
+export class ComponentsModule {}
