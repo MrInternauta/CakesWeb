@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  show = false;
   title = 'pasteleria';
+
+  toggle() {
+    this.show = !this.show;
+  }
 }

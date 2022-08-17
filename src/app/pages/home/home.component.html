@@ -1,2 +1,10 @@
-<h1> hello</h1>
-<app-dropdown [cakes]="cakes"></app-dropdown>
+<app-dropdown *ngIf="cakes" [title]="'Select cake'" [cakes]="cakes" (dropdownChange$)="dropDownChange($event)"></app-dropdown>
+
+<app-dropdown *ngIf="complementCakes" [title]="'Complement cake'" [cakes]="complementCakes" (dropdownChange$)="dropDownComplementChange($event)"></app-dropdown>
+
+
+<app-dropdown *ngIf="this.checkOut.baseId && this.checkOut.complementCakeId" [title]="'Payment method'" [cakes]="paymentMethods" (dropdownChange$)="dropDownSelectPaymentChange($event)"></app-dropdown>
+
+<app-payment-method *ngIf="checkOut.paymentMethodId && this.checkOut.paymentMethodId == 1"(creditChanges$)="creditCardPayment($event)"></app-payment-method>
+
+<app-paypal-method  *ngIf="checkOut.paymentMethodId && this.checkOut.paymentMethodId == 2" (emailChanges$)="paypalPayment($event)"></app-paypal-method>

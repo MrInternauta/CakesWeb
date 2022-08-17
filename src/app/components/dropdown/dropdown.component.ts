@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ICakeBase, ICakeComplement } from '../../interfaces/Icake';
+import { IPayment } from '../../interfaces/IPayment';
 
 @Component({
   selector: 'app-dropdown',
@@ -7,8 +9,21 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class DropdownComponent implements OnInit {
   @Input()
-  cakes!: any[];
+  title!: string;
+  @Input()
+  cakes!: Array<ICakeBase | ICakeComplement | IPayment>;
+  show!: boolean;
+  @Output() dropdownChange$: EventEmitter<number> = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}
+
+  toggle() {
+    this.show = !this.show;
+  }
+
+  selectItem(id: number) {
+    this.show = false;
+    this.dropdownChange$.emit(id);
+  }
 }
