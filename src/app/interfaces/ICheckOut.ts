@@ -1,5 +1,5 @@
 import { ICardForm } from './Icard';
-import { ICakeBase } from './Icake';
+import { ICakeSelected } from './Icake';
 
 export interface ICheckOut {
   paymentMethodId?: number;
@@ -7,6 +7,6 @@ export interface ICheckOut {
   email?: string;
   baseId?: number;
   complementCakeId?: number;
-  othersComplements?: ICakeBase[];
   total?: number;
+  cakeSelected?: ICakeSelected;
 }

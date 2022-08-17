@@ -9,8 +9,6 @@ import { IPayment } from '../../interfaces/IPayment';
 })
 export class DropdownComponent implements OnInit {
   @Input()
-  title!: string;
-  @Input()
   cakes!: Array<ICakeBase | ICakeComplement | IPayment>;
   show!: boolean;
   @Output() dropdownChange$: EventEmitter<number> = new EventEmitter();
