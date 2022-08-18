@@ -1,44 +1,48 @@
 <ng-container *ngIf="!showCheckOut">
   <h1 class="flex flex-wrap w-full text-3xl font-extrabold text-gray-800 tracking-widest justify-center items-center">Create your cake</h1>
 
-<div class="flex flex-wrap w-full p-5 justify-center items-center">
-  <form class="flex flex-wrap w-1/2 gap-3 p-5">
-    <div class="relative w-full flex flex-col" *ngIf="cakes">
+  <div class="flex flex-wrap w-full p-5 justify-center items-center">
+    <form class="flex flex-wrap w-1/2 gap-3 p-5">
+      <div class="relative w-full flex flex-col" *ngIf="cakes">
+        <label class="relative w-full flex flex-col">
+          <span class="font-bold mb-3">Select cake</span>
+        </label>
+        <app-dropdown [cakes]="cakes" (dropdownChange$)="dropDownChange($event)"></app-dropdown>
+      </div>
+
+      <div class="relative w-full flex flex-col" *ngIf="complementCakes" >
+        <label class="relative w-full flex flex-col">
+          <span class="font-bold mb-3">Complement cake</span>
+        </label>
+        <app-dropdown [cakes]="complementCakes" (dropdownChange$)="dropDownComplementChange($event)"></app-dropdown>
+      </div>
+
+      <div class="relative w-full flex flex-col" *ngIf="complementCakes && checkOut.baseId && checkOut.complementCakeId">
+        <label class="relative w-full flex flex-col">
+          <span class="font-bold mb-3">Payment method</span>
+        </label>
+        <app-dropdown [cakes]="paymentMethods" (dropdownChange$)="dropDownSelectPaymentChange($event)"></app-dropdown>
+      </div>
+    </form>
+
+    <div class="flex flex-wrap w-1/2 gap-3 p-5"  *ngIf="checkOut.baseId || checkOut.complementCakeId">
       <label class="relative w-full flex flex-col">
-        <span class="font-bold mb-3">Select cake</span>
+        <span class="font-bold mb-3">Your selection</span>
       </label>
-      <app-dropdown [cakes]="cakes" (dropdownChange$)="dropDownChange($event)"></app-dropdown>
-    </div>
+      <div class="relative w-full flex flex-col">
+        <app-product [name]="cakeSelected.title ||  ''" [price]="checkOut.total ||  0" [image]="cakeSelected.complement?.image || ''" ></app-product>
+      </div>
 
-    <div class="relative w-full flex flex-col" *ngIf="complementCakes" >
-      <label class="relative w-full flex flex-col">
-        <span class="font-bold mb-3">Complement cake</span>
-      </label>
-      <app-dropdown [cakes]="complementCakes" (dropdownChange$)="dropDownComplementChange($event)"></app-dropdown>
     </div>
+    <div class="flex flex-wrap w-full justify-center items-center">
+      <div class="flex flex-wrap w-1/2 gap-3 p-5">
+        <app-payment-method *ngIf="checkOut.paymentMethodId && this.checkOut.paymentMethodId == 1"(creditChanges$)="creditCardPayment($event)"></app-payment-method>
 
-    <div class="relative w-full flex flex-col" *ngIf="complementCakes && checkOut.baseId && checkOut.complementCakeId">
-      <label class="relative w-full flex flex-col">
-        <span class="font-bold mb-3">Payment method</span>
-      </label>
-      <app-dropdown [cakes]="paymentMethods" (dropdownChange$)="dropDownSelectPaymentChange($event)"></app-dropdown>
+        <app-paypal-method  *ngIf="checkOut.paymentMethodId && this.checkOut.paymentMethodId == 2" (emailChanges$)="paypalPayment($event)"></app-paypal-method>
+      </div>
     </div>
-  </form>
-
-  <div class="flex flex-wrap w-1/2 gap-3 p-5"  *ngIf="checkOut.baseId || checkOut.complementCakeId">
-    <label class="relative w-full flex flex-col">
-      <span class="font-bold mb-3">Your selection</span>
-    </label>
-    <div class="relative w-full flex flex-col">
-      <app-product [name]="cakeSelected.title ||  ''" [price]="checkOut.total ||  0" [image]="cakeSelected.complement?.image || ''" ></app-product>
-    </div>
-
   </div>
-</div>
 
-<app-payment-method *ngIf="checkOut.paymentMethodId && this.checkOut.paymentMethodId == 1"(creditChanges$)="creditCardPayment($event)"></app-payment-method>
-
-<app-paypal-method  *ngIf="checkOut.paymentMethodId && this.checkOut.paymentMethodId == 2" (emailChanges$)="paypalPayment($event)"></app-paypal-method>
 </ng-container>
 
 
