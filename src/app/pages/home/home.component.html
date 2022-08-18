@@ -17,7 +17,7 @@
       <app-dropdown [cakes]="complementCakes" (dropdownChange$)="dropDownComplementChange($event)"></app-dropdown>
     </div>
 
-    <div class="relative w-full flex flex-col" *ngIf="this.checkOut.baseId && this.checkOut.complementCakeId">
+    <div class="relative w-full flex flex-col" *ngIf="complementCakes && checkOut.baseId && checkOut.complementCakeId">
       <label class="relative w-full flex flex-col">
         <span class="font-bold mb-3">Payment method</span>
       </label>
@@ -25,10 +25,14 @@
     </div>
   </form>
 
-  <div class="flex flex-wrap w-1/2 gap-3 p-5"  *ngIf="checkOut.baseId && checkOut.complementCakeId">
+  <div class="flex flex-wrap w-1/2 gap-3 p-5"  *ngIf="checkOut.baseId || checkOut.complementCakeId">
+    <label class="relative w-full flex flex-col">
+      <span class="font-bold mb-3">Your selection</span>
+    </label>
     <div class="relative w-full flex flex-col">
-      <app-product [name]="cakeSelected.title || ''" [price]="checkOut.total || 0" [image]="cakeSelected.complement?.image || 'https://t2.rg.ltmcdn.com/es/posts/2/4/9/pastel_de_fresa_23942_600.jpg'" ></app-product>
+      <app-product [name]="cakeSelected.title ||  ''" [price]="checkOut.total ||  0" [image]="cakeSelected.complement?.image || ''" ></app-product>
     </div>
+
   </div>
 </div>
 

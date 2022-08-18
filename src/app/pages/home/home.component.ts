@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
     private paymentService: PaymentService
   ) {
     this.checkOut = { baseId: 0 };
+    this.cakeSelected = {};
   }
 
   ngOnInit(): void {
@@ -37,10 +38,10 @@ export class HomeComponent implements OnInit {
   dropDownChange(id: number) {
     this.checkOut.baseId = id;
     this.checkOut.complementCakeId = undefined;
-
     this.complementCakes = this.cakeService.getCakesComplement(
       this.checkOut.baseId
     );
+    this.showProduct(id);
   }
 
   dropDownComplementChange(id: number) {
@@ -64,16 +65,23 @@ export class HomeComponent implements OnInit {
   }
 
   showProduct(id?: number, compleId?: number) {
-    if (!id || !compleId) return;
-    this.cakeSelected = {};
-    this.cakeSelected.base = this.cakeService.findBase(id);
-    this.cakeSelected.complement = this.cakeService.findComplement(compleId);
-    this.checkOut.total =
-      (this.cakeSelected.base?.value || 0) +
-      (this.cakeSelected.complement?.value || 0);
-    this.cakeSelected.title = `${this.cakeSelected.base?.name || ''}: ${
-      this.cakeSelected.complement?.name || ''
-    }`;
+    if (!id && !compleId) return;
+    if (id && !compleId) {
+      this.cakeSelected.base = this.cakeService.findBase(id);
+      this.checkOut.total = this.cakeSelected.base?.value || 0;
+      this.cakeSelected.title = `${this.cakeSelected.base?.name || ''}`;
+      this.cakeSelected.complement = undefined;
+    } else if (id && compleId) {
+      this.cakeSelected.complement = this.cakeService.findComplement(compleId);
+      // Assign total
+      this.checkOut.total =
+        (this.checkOut.total || 0) + (this.cakeSelected.complement?.value || 0);
+      // Assign title
+      this.cakeSelected.title += `: ${
+        this.cakeSelected.complement?.name || ''
+      }`;
+    }
+
     console.log(this.cakeSelected);
   }
 

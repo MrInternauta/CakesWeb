@@ -8,21 +8,21 @@ export class CakesService {
   private _caseBase: ICakeBase[] = [
     {
       id: 1,
-      name: 'Cake 1',
+      name: 'Tres leches',
       description: '',
       value: 204,
       stock: 0,
     },
     {
       id: 2,
-      name: 'Cake 2',
+      name: 'Pan mantequilla',
       description: '',
       value: 303,
       stock: 0,
     },
     {
       id: 3,
-      name: 'Cake 3',
+      name: 'Pan de elote',
       description: '',
       value: 402,
       stock: 0,
@@ -31,7 +31,7 @@ export class CakesService {
   private _cakesComplements: ICakeComplement[] = [
     {
       id: 1,
-      name: 'Cake 1 Complement',
+      name: 'Cake 1',
       description: '',
       value: 110,
       stock: 0,
@@ -41,7 +41,38 @@ export class CakesService {
     },
     {
       id: 2,
-      name: 'Cake 2 Complement ',
+      name: 'Cake 2',
+      description: '',
+      value: 220,
+      stock: 0,
+      baseId: 1,
+      image:
+        'https://cdn2.cocinadelirante.com/sites/default/files/styles/gallerie/public/images/2020/12/recetas-pasteles-vender-nortonrsx.jpg',
+    },
+    {
+      id: 3,
+      name: 'Cake 3',
+      description: '',
+      value: 110,
+      stock: 0,
+      baseId: 1,
+      image:
+        'https://i0.wp.com/foodandpleasure.com/wp-content/uploads/2021/09/pasteles-retro-cdmx.jpeg',
+    },
+
+    {
+      id: 1,
+      name: 'Cake 4',
+      description: '',
+      value: 110,
+      stock: 0,
+      baseId: 2,
+      image:
+        'https://t2.rg.ltmcdn.com/es/posts/2/4/9/pastel_de_fresa_23942_600.jpg',
+    },
+    {
+      id: 2,
+      name: 'Cake 5',
       description: '',
       value: 220,
       stock: 0,
@@ -51,7 +82,38 @@ export class CakesService {
     },
     {
       id: 3,
-      name: 'Cake 3 Complement',
+      name: 'Cake 6',
+      description: '',
+      value: 110,
+      stock: 0,
+      baseId: 2,
+      image:
+        'https://i0.wp.com/foodandpleasure.com/wp-content/uploads/2021/09/pasteles-retro-cdmx.jpeg',
+    },
+
+    {
+      id: 1,
+      name: 'Cake 7',
+      description: '',
+      value: 110,
+      stock: 0,
+      baseId: 3,
+      image:
+        'https://t2.rg.ltmcdn.com/es/posts/2/4/9/pastel_de_fresa_23942_600.jpg',
+    },
+    {
+      id: 2,
+      name: 'Cake 8',
+      description: '',
+      value: 220,
+      stock: 0,
+      baseId: 3,
+      image:
+        'https://cdn2.cocinadelirante.com/sites/default/files/styles/gallerie/public/images/2020/12/recetas-pasteles-vender-nortonrsx.jpg',
+    },
+    {
+      id: 3,
+      name: 'Cake 9',
       description: '',
       value: 110,
       stock: 0,
